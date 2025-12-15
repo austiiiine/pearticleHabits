@@ -21,7 +21,7 @@ struct HabitRowView: View {
           .font(.title3)
           .fontWeight(.semibold)
       }
-      Spacer()
+      Spacer(minLength: 12)
       HStack(alignment: .center, spacing: 16) {
         VStack(alignment: .trailing, spacing: 0) {
           Text(String(habit.pearCount))

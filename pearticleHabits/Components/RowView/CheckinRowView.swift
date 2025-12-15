@@ -2,6 +2,12 @@ import SwiftUI
 
 struct CheckinRowView: View {
   let habit: Habit
+  @Environment(AppModel.self) var appModel
+
+  func todayCount() -> Int {
+    let today = appModel.dateFormatter.string(from: Date())
+    return habit.records[today] ?? 0
+  }
 
   var body: some View {
 
@@ -20,22 +26,22 @@ struct CheckinRowView: View {
           .fontWeight(.semibold)
       }
 
-      Spacer()
+      Spacer(minLength: 12)
 
       // 左側數字 + 按鈕
       HStack(alignment: .center, spacing: 16) {
         VStack(alignment: .trailing) {
-          Text(String(habit.pearCount))
+          Text(String(String(todayCount())))
             .font(.title3)
             .fontWeight(.bold)
             .foregroundStyle(.forest)
-          Text("今日完成次數")
+          Text("今日次數")
             .font(.callout)
             .foregroundStyle(.forest)
         }
         // 打卡按鈕
         Button {
-          // 打卡 function
+          appModel.addRecord(for: habit)
         } label: {
           Image(systemName: "plus")
             .font(.system(size: 18, weight: .bold))

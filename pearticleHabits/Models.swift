@@ -12,7 +12,7 @@ struct Habit: Identifiable, Codable {
   var streakCount: Int = 0 // 連續打卡天數
 
   // 每天打卡計數
-  var records: [String: Int] = [:] // 先用 String key，之後會換成 Date
+  var records: [String: Int] = [:] // 用 DateFormatter 轉存
 }
 
 // 獎勵項目

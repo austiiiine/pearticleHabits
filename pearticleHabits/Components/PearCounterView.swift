@@ -39,7 +39,7 @@ struct PearCounterView: View {
   private func generalView(showButton: Bool) -> some View {
     VStack(alignment: .leading, spacing: 12) {
 
-      Text("累積梨子數")
+      Text("可兌換梨子數")
         .font(.body)
         .fontWeight(.semibold)
         .foregroundStyle(.forest.opacity(0.7))
@@ -51,7 +51,7 @@ struct PearCounterView: View {
           Spacer()
 
           Button {
-            selectedTab = 3
+            selectedTab = 2
           } label: {
             ExchangeButton(label: "前往兌換獎勵")
           }
@@ -92,16 +92,6 @@ struct PearCounterView: View {
         countBlock(count: streakCount, icon: "🔥")
       }
       .frame(maxWidth: .infinity, alignment: .leading)
-    }
-  }
-
-  // MARK: - 主梨子數
-  private var mainPearCount: Int {
-    switch mode {
-    case .general:
-      return appModel.totalPearCount
-    case let .habitStreak(pearCount, _):
-      return pearCount
     }
   }
 

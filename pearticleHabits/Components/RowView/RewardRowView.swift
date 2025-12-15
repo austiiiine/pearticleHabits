@@ -31,10 +31,10 @@ struct RewardRowView: View {
           }
         }
       }
-      Spacer()
+      Spacer(minLength: 12)
       HStack(alignment: .center, spacing: 12) {
         Button {
-          print("exchange reward")
+          // redeem
         } label: {
           ExchangeButton(label: "兌換")
         }

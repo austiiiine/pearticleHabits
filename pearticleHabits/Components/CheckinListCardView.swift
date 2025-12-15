@@ -16,7 +16,7 @@ struct CheckinListCard: View {
       }
     }
     .padding(.vertical, 4)
-    .padding(.horizontal, 20)
+    .padding(.horizontal, 24)
     .cardStyle()
   }
 }

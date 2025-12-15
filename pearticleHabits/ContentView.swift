@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
   @State private var appModel = AppModel()
+  @State private var selectedTab: Int = 0
 
   // 自訂 title 顏色
   init() {
@@ -23,18 +24,22 @@ struct ContentView: View {
   }
 
   var body: some View {
-    TabView {
-      CheckinView()
+    TabView(selection: $selectedTab) {
+      CheckinView(selectedTab: $selectedTab)
         .tabItem { Label("打卡", systemImage: "checkmark.circle") }
+        .tag(0)
 
       HabitListView()
         .tabItem { Label("習慣", systemImage: "list.bullet") }
+        .tag(1)
 
       RewardListView()
         .tabItem { Label("獎勵", systemImage: "gift") }
+        .tag(2)
 
       SettingsView()
         .tabItem { Label("設定", systemImage: "gearshape") }
+        .tag(3)
     }
     .environment(appModel)
   }
