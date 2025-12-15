@@ -1,7 +1,64 @@
-//
-//  RewardRowView.swift
-//  pearticleHabits
-//
-//  Created by Austine Huang on 2025/12/15.
-//
+import SwiftUI
 
+struct RewardRowView: View {
+  @Environment(AppModel.self) var appModel
+
+  let reward: Reward
+
+  var body: some View {
+    HStack(alignment: .center) {
+      HStack(alignment: .center, spacing: 16) {
+        // icon
+        VStack(alignment: .center) {
+          Image(systemName: reward.icon)
+            .font(.system(size: 28, weight: .semibold))
+            .foregroundStyle(reward.colorType.color)
+        }
+        .frame(width: 28)
+
+        VStack(alignment: .leading, spacing: 4) {
+          Text(reward.title)
+            .foregroundStyle(Color("forest"))
+            .font(.title3)
+            .fontWeight(.semibold)
+          // 梨子價
+          HStack(alignment: .center, spacing: 2) {
+            Text("🍐")
+              .font(.system(size: 16))
+            Text(String(reward.cost))
+              .font(.callout)
+              .foregroundStyle(.forest)
+          }
+        }
+      }
+      Spacer()
+      HStack(alignment: .center, spacing: 12) {
+        Button {
+          print("exchange reward")
+        } label: {
+          ExchangeButton(label: "兌換")
+        }
+        .buttonStyle(.plain)
+        Image(systemName: "chevron.right")
+          .font(.system(size: 16, weight: .semibold))
+          .foregroundStyle(.forest)
+      }
+    }
+    .padding(.horizontal, 20)
+    .padding(.vertical, 20)
+    .frame(maxWidth: .infinity, alignment: .center)
+    .cardStyle()
+  }
+}
+
+#Preview {
+  RewardRowView(reward:
+                  Reward(
+                    title: "吃提拉米蘇",
+                    icon: "birthday.cake.fill",
+                    colorType: .mustard,
+                    cost: 7
+                  )
+  )
+  .environment(AppModel())
+}
