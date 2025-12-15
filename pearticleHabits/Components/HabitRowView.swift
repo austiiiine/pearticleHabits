@@ -25,11 +25,11 @@ struct HabitRowView: View {
       HStack(alignment: .center, spacing: 16) {
         VStack(alignment: .trailing, spacing: 0) {
           Text(String(habit.pearCount))
-            .font(.system(size: 18))
+            .font(.title3)
             .fontWeight(.bold)
             .foregroundStyle(.forest)
           Text("已累積")
-            .font(.caption)
+            .font(.callout)
             .foregroundStyle(.forest)
         }
         Image(systemName: "chevron.right")

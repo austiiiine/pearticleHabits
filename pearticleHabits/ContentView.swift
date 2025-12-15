@@ -24,7 +24,7 @@ struct ContentView: View {
 
   var body: some View {
     TabView {
-      TrackerView()
+      CheckinView()
         .tabItem { Label("打卡", systemImage: "checkmark.circle") }
 
       HabitListView()

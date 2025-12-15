@@ -6,7 +6,7 @@ struct RewardListView: View {
   var body: some View {
     NavigationStack {
       ZStack {
-        Color(.rice)
+        Color(.white)
           .ignoresSafeArea()
 
         ScrollView {

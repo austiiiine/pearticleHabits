@@ -47,7 +47,7 @@ struct RewardRowView: View {
     .padding(.horizontal, 20)
     .padding(.vertical, 20)
     .frame(maxWidth: .infinity, alignment: .center)
-    .cardStyle()
+    .cardStyle(background: .rice)
   }
 }
 

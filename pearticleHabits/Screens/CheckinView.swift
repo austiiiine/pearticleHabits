@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TrackerView: View {
+struct CheckinView: View {
   @Environment(AppModel.self) var store
   
   var body: some View {

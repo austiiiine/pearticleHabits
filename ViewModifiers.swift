@@ -3,10 +3,11 @@ import SwiftUI
 // 卡片樣式
 struct CardStyle: ViewModifier {
   var cornerRadius: CGFloat = 20
+  var backgroundColor: Color = .white
 
   func body(content: Content) -> some View {
     content
-      .background(Color.white)
+      .background(backgroundColor)
       .cornerRadius(cornerRadius)
       .overlay(
         RoundedRectangle(cornerRadius: cornerRadius)
@@ -17,7 +18,15 @@ struct CardStyle: ViewModifier {
 }
 
 extension View {
-  func cardStyle(cornerRadius: CGFloat = 20) -> some View {
-    modifier(CardStyle(cornerRadius: cornerRadius))
+  func cardStyle(
+    cornerRadius: CGFloat = 20,
+    background: Color = .white
+  ) -> some View {
+    modifier(
+      CardStyle(
+        cornerRadius: cornerRadius,
+        backgroundColor: background
+      )
+    )
   }
 }
