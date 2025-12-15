@@ -34,11 +34,13 @@ struct RewardRowView: View {
       Spacer(minLength: 12)
       HStack(alignment: .center, spacing: 12) {
         Button {
-          // redeem
+          appModel.redeemReward(reward)
         } label: {
-          ExchangeButton(label: "兌換")
+          RedeemButton(label: reward.redeemed ? "已兌換" : "兌換")
+            .opacity(reward.redeemed ? 0.6 : 1.0)
         }
         .buttonStyle(.plain)
+        .disabled(reward.redeemed)
         Image(systemName: "chevron.right")
           .font(.system(size: 16, weight: .semibold))
           .foregroundStyle(.forest)

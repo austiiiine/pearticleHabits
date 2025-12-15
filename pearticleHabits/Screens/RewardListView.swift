@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RewardListView: View {
   @Environment(AppModel.self) var appModel
+  @Binding var selectedTab: Int
 
   var body: some View {
     NavigationStack {
@@ -10,6 +11,12 @@ struct RewardListView: View {
           .ignoresSafeArea()
 
         ScrollView {
+          PearCounterView(
+            selectedTab: $selectedTab,
+            mode: .general(showButton: false)
+          )
+          .padding(.bottom, 20)
+
           VStack(spacing: 16) {
             //            ForEach(appModel.rewards) { reward in
             //              RewardRowView(reward: reward)
@@ -43,6 +50,8 @@ struct RewardListView: View {
 }
 
 #Preview {
-  RewardListView()
+  @Previewable @State var selectedTab = 0
+
+  RewardListView(selectedTab: $selectedTab)
     .environment(AppModel())
 }

@@ -23,7 +23,7 @@ struct Reward: Identifiable, Codable {
   var colorType: ColorType
 
   var cost: Int // 需要多少貼紙兌換
-  var exchanged: Bool = false // 是否已兌換
+  var redeemed: Bool = false // 是否已兌換
 }
 
 // 設定顏色物件

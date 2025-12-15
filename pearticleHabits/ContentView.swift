@@ -33,7 +33,7 @@ struct ContentView: View {
         .tabItem { Label("習慣", systemImage: "list.bullet") }
         .tag(1)
 
-      RewardListView()
+      RewardListView(selectedTab: $selectedTab)
         .tabItem { Label("獎勵", systemImage: "gift") }
         .tag(2)
 

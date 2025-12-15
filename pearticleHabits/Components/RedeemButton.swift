@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ExchangeButton: View {
+struct RedeemButton: View {
   let label: String
 
   var body: some View {
@@ -24,6 +24,6 @@ struct ExchangeButton: View {
 }
 
 #Preview {
-  ExchangeButton(label: "兌換")
+  RedeemButton(label: "兌換")
     .padding()
 }

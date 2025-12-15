@@ -12,29 +12,44 @@ class AppModel {
   private let redeemableKey = "redeemablePearKey"
 
   init() {
-    // 如果本機還沒資料，才加入假資料
     if UserDefaults.standard.data(forKey: habitsKey) == nil {
-      habits = [
-        Habit(title: "畫畫", icon: "paintpalette.fill", colorType: .mustard, pearCount: 19, streakCount: 12),
-        Habit(title: "吃保健品", icon: "pills.fill", colorType: .peach, pearCount: 7, streakCount: 5),
-        Habit(title: "健身", icon: "dumbbell.fill", colorType: .fern, pearCount: 42, streakCount: 35),
-        Habit(title: "喝水 1000 cc", icon: "drop.fill", colorType: .sky, pearCount: 28, streakCount: 21),
-        Habit(title: "閱讀 20 分鐘", icon: "book.fill", colorType: .lime, pearCount: 15, streakCount: 10)
-      ]
-
-      rewards = [
-        Reward(title: "吃提拉米蘇", icon: "birthday.cake.fill", colorType: .mustard, cost: 7),
-        Reward(title: "買手機殼", icon: "iphone.gen3", colorType: .sky, cost: 30)
-      ]
-
-      redeemablePearCount = 0
-
-      // 第一次初始化後馬上儲存
+      initializeFakeData()
       saveData()
     }
-
-    // 載入本地儲存的資料
     loadData()
+  }
+
+  /// 把假資料寫入狀態中
+  func initializeFakeData() {
+    habits = [
+      Habit(title: "畫畫", icon: "paintpalette.fill", colorType: .mustard, pearCount: 19, streakCount: 12),
+      Habit(title: "吃保健品", icon: "pills.fill", colorType: .peach, pearCount: 7, streakCount: 5),
+      Habit(title: "健身", icon: "dumbbell.fill", colorType: .fern, pearCount: 42, streakCount: 35),
+      Habit(title: "喝水 1000 cc", icon: "drop.fill", colorType: .sky, pearCount: 28, streakCount: 21),
+      Habit(title: "閱讀 20 分鐘", icon: "book.fill", colorType: .lime, pearCount: 15, streakCount: 10)
+    ]
+    rewards = [
+      Reward(title: "吃提拉米蘇", icon: "birthday.cake.fill", colorType: .mustard, cost: 7),
+      Reward(title: "買手機殼", icon: "iphone.gen3", colorType: .sky, cost: 30)
+    ]
+    redeemablePearCount = habits.reduce(0) { $0 + $1.pearCount }
+  }
+
+  /// 清除所有資料並重新初始化
+  func resetData() {
+    // 移除儲存資料
+    UserDefaults.standard.removeObject(forKey: habitsKey)
+    UserDefaults.standard.removeObject(forKey: rewardsKey)
+    UserDefaults.standard.removeObject(forKey: redeemableKey)
+
+    // 清空目前狀態
+    habits = []
+    rewards = []
+    redeemablePearCount = 0
+
+    // 重設假資料
+    initializeFakeData()
+    saveData()
   }
 
   // MARK: - 儲存與載入（用 UserDefaults）
@@ -182,13 +197,14 @@ class AppModel {
   // 兌換獎勵
   func redeemReward(_ reward: Reward) {
     guard let index = rewards.firstIndex(where: { $0.id == reward.id }) else { return }
-    guard !rewards[index].exchanged else { return }
+    guard !rewards[index].redeemed else { return }
     guard redeemablePearCount >= reward.cost else { return }
 
     redeemablePearCount -= reward.cost
-    rewards[index].exchanged = true
+    rewards[index].redeemed = true
 
     saveData()
   }
+
 }
 

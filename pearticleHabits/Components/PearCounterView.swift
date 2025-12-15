@@ -9,6 +9,19 @@ enum PearCounterMode {
 // generalButtonTrue - 對應mode：.general(showButton: true)
 // HabitStreakTrue - 對應mode：.habitStreak(pearCount:, streakCount:)
 
+// 讓 enum 可以比較
+extension PearCounterMode: Equatable {
+  static func == (lhs: PearCounterMode, rhs: PearCounterMode) -> Bool {
+    switch (lhs, rhs) {
+    case (.general(let l), .general(let r)):
+      return l == r
+    case (.habitStreak, .habitStreak):
+      return false
+    default:
+      return false
+    }
+  }
+}
 
 struct PearCounterView: View {
   @Environment(AppModel.self) var appModel
@@ -32,7 +45,7 @@ struct PearCounterView: View {
     .padding(.horizontal, 28)
     .padding(.vertical, 28)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .cardStyle()
+    .cardStyle(background: (mode == .general(showButton: false)) ? .rice : .white)
   }
 
   // general(showButton: Bool)
@@ -45,7 +58,7 @@ struct PearCounterView: View {
         .foregroundStyle(.forest.opacity(0.7))
 
       HStack(alignment: .center) {
-        countBlock(count: appModel.totalPearCount, icon: "🍐")
+        countBlock(count: appModel.redeemablePearCount, icon: "🍐")
 
         if showButton {
           Spacer()
@@ -53,7 +66,7 @@ struct PearCounterView: View {
           Button {
             selectedTab = 2
           } label: {
-            ExchangeButton(label: "前往兌換獎勵")
+            RedeemButton(label: "前往兌換獎勵")
           }
           .buttonStyle(.plain)
         }
