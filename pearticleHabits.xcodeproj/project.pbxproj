@@ -6,12 +6,7 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		C335168C2EEFEF8600C4B349 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335168B2EEFEF7E00C4B349 /* ViewModifiers.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		C335168B2EEFEF7E00C4B349 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		C387FB2C2EED627E0002BBD3 /* pearticleHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pearticleHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -39,7 +34,6 @@
 			children = (
 				C387FB2E2EED627E0002BBD3 /* pearticleHabits */,
 				C387FB2D2EED627E0002BBD3 /* Products */,
-				C335168B2EEFEF7E00C4B349 /* ViewModifiers.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,7 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C335168C2EEFEF8600C4B349 /* ViewModifiers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

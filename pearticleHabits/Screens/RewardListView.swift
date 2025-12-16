@@ -23,7 +23,11 @@ struct RewardListView: View {
             //            }
             ForEach(appModel.rewards) { reward in
               NavigationLink {
-                RewardDetailView(reward: reward)
+                RewardDetailView(
+                  selectedTab: $selectedTab,
+                  reward: reward
+                )
+                .toolbar(.hidden, for: .tabBar)
               } label: {
                 RewardRowView(reward: reward)
               }
