@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RewardDetailView: View {
   @Environment(AppModel.self) var appModel
+  @Environment(\.dismiss) var dismiss
   @Binding var selectedTab: Int
 
   let reward: Reward
@@ -10,6 +11,7 @@ struct RewardDetailView: View {
   @State private var showRedeemAlert = false
   @State private var showEditSheet = false
   @State private var showDeleteAlert = false
+  @State private var showPearNotEnoughAlert = false
 
   // 編輯用(展示 hold 要編輯的獎勵的容器)
   @State private var editingReward: Reward
@@ -111,6 +113,13 @@ struct RewardDetailView: View {
         }
       }
 
+      // 編輯 sheet
+      .sheet(isPresented: $showEditSheet) {
+        EditRewardView(isPresented: $showEditSheet, reward: editingReward)
+          .presentationDetents([.large])
+          .presentationCornerRadius(24)
+      }
+
       // 兌換獎勵 alert
       .alert("是否確認兌換獎勵？", isPresented: $showRedeemAlert) {
         Button("取消", role: .cancel) { }
@@ -118,7 +127,7 @@ struct RewardDetailView: View {
           appModel.redeemReward(reward)
         }
       } message: {
-        Text("此動作無法回復，兌換的梨子無法退回喔！")
+        Text("此操作無法復原，兌換的梨子無法退回喔！")
       }
 
       // 刪除確認 alert
@@ -127,6 +136,7 @@ struct RewardDetailView: View {
         Button("刪除", role: .destructive) {
           if let index = appModel.rewards.firstIndex(where: { $0.id == reward.id }) {
             appModel.rewards.remove(at: index)
+            dismiss()
           }
         }
       } message: {
