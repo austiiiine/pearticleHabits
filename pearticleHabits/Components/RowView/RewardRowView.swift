@@ -4,6 +4,10 @@ struct RewardRowView: View {
   @Environment(AppModel.self) var appModel
   @State private var showAlert = false
 
+  // 錯誤訊息 alert
+  @State private var showErrorAlert = false
+  @State private var errorMessage: String = ""
+
   let reward: Reward
 
   var body: some View {
@@ -52,14 +56,27 @@ struct RewardRowView: View {
     .padding(.vertical, 20)
     .frame(maxWidth: .infinity, alignment: .center)
     .cardStyle(background: .rice)
+
+    // 兌換確認 alert
     .alert("是否確認兌換獎勵？", isPresented: $showAlert) {
-      Button("取消", role: .cancel) { }
+      Button("取消", role: .cancel) {}
       Button("確認兌換") {
-        appModel.redeemReward(reward)
+        if let error = appModel.redeemReward(reward) {
+          errorMessage = error
+          showErrorAlert = true
+        }
       }
     } message: {
       Text("此動作無法回復，兌換的梨子無法退回喔！")
     }
+
+    // 錯誤訊息 alert
+    .alert("無法兌換獎勵", isPresented: $showErrorAlert) {
+      Button("好") {}
+    } message: {
+      Text(errorMessage)
+    }
+
   }
 }
 

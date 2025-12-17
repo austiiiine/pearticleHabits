@@ -2,7 +2,8 @@ import SwiftUI
 
 struct HabitListView: View {
   @Environment(AppModel.self) var appModel
-  
+  @Binding var selectedTab: Int
+
   @State private var showingNewHabitSheet = false
 
   var body: some View {
@@ -18,7 +19,7 @@ struct HabitListView: View {
             //            }
             ForEach(appModel.habits) { habit in
               NavigationLink {
-                HabitDetailView(habit: habit)
+                HabitDetailView(selectedTab: $selectedTab, habit: habit)
               } label: {
                 HabitRowView(habit: habit)
               }
@@ -50,6 +51,8 @@ struct HabitListView: View {
 }
 
 #Preview {
-  HabitListView()
+  @Previewable @State var selectedTab: Int = 0
+
+  HabitListView(selectedTab: $selectedTab)
     .environment(AppModel())
 }

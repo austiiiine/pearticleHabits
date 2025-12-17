@@ -29,7 +29,7 @@ struct ContentView: View {
         .tabItem { Label("打卡", systemImage: "checkmark.circle") }
         .tag(0)
 
-      HabitListView()
+      HabitListView(selectedTab: $selectedTab)
         .tabItem { Label("習慣", systemImage: "list.bullet") }
         .tag(1)
 

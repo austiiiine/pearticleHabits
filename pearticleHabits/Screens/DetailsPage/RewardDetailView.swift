@@ -7,11 +7,14 @@ struct RewardDetailView: View {
 
   let reward: Reward
 
-  // 管理 alert
+  // 管理 alerts
   @State private var showRedeemAlert = false
   @State private var showEditSheet = false
   @State private var showDeleteAlert = false
-  @State private var showPearNotEnoughAlert = false
+  @State private var showErrorAlert = false
+
+  // 梨子數不足的錯誤訊息
+  @State private var errorMessage: String = ""
 
   // 編輯用(展示 hold 要編輯的獎勵的容器)
   @State private var editingReward: Reward
@@ -120,14 +123,24 @@ struct RewardDetailView: View {
           .presentationCornerRadius(24)
       }
 
-      // 兌換獎勵 alert
+      // 兌換確認 alert
       .alert("是否確認兌換獎勵？", isPresented: $showRedeemAlert) {
-        Button("取消", role: .cancel) { }
+        Button("取消", role: .cancel) {}
         Button("確認兌換") {
-          appModel.redeemReward(reward)
+          if let error = appModel.redeemReward(reward) {
+            errorMessage = error
+            showErrorAlert = true
+          }
         }
       } message: {
         Text("此操作無法復原，兌換的梨子無法退回喔！")
+      }
+
+      // 錯誤訊息 alert
+      .alert("無法兌換獎勵", isPresented: $showErrorAlert) {
+        Button("好") {}
+      } message: {
+        Text(errorMessage)
       }
 
       // 刪除確認 alert

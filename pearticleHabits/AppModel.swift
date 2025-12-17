@@ -214,15 +214,18 @@ class AppModel {
   }
 
   // 兌換獎勵
-  func redeemReward(_ reward: Reward) {
-    guard let index = rewards.firstIndex(where: { $0.id == reward.id }) else { return }
-    guard !rewards[index].redeemed else { return }
-    guard redeemablePearCount >= reward.cost else { return }
+  // 回傳 Bool 表示是否兌換成功
+  @discardableResult
+  // 回傳 nil 表示成功，否則是錯誤訊息
+  func redeemReward(_ reward: Reward) -> String? {
+    guard let index = rewards.firstIndex(where: { $0.id == reward.id }) else { return "找不到獎勵" }
+    guard !rewards[index].redeemed else { return "此獎勵已兌換" }
+    guard redeemablePearCount >= reward.cost else { return "梨子數不足，無法兌換" }
 
     redeemablePearCount -= reward.cost
     rewards[index].redeemed = true
-
     saveData()
+    return nil
   }
 
 }
