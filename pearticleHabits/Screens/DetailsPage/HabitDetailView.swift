@@ -126,15 +126,15 @@ struct HabitDetailView: View {
               )
             }
 
-            // calendar view
-            VStack(alignment: .leading, spacing: 12) {
-              // 子標題
-              Text("打卡總覽")
-                .font(.title2)
-                .bold()
-                .foregroundStyle(.forest)
-              // calendar
-            }
+//            // calendar view
+//            VStack(alignment: .leading, spacing: 12) {
+//              // 子標題
+//              Text("打卡總覽")
+//                .font(.title2)
+//                .bold()
+//                .foregroundStyle(.forest)
+//              // calendar
+//            }
 
           }
           .padding(.top, 20)
@@ -181,6 +181,7 @@ struct HabitDetailView: View {
       // 編輯 sheet
       .sheet(isPresented: $showEditSheet) {
         EditHabitView(isPresented: $showEditSheet, habit: editingHabit)
+          .environment(appModel)
           .presentationDetents([.large])
           .presentationCornerRadius(24)
       }

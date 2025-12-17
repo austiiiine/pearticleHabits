@@ -14,12 +14,9 @@ struct HabitListView: View {
 
         ScrollView {
           VStack(spacing: 16) {
-            //            ForEach(appModel.habits) { habit in
-            //              HabitRowView(habit: habit)
-            //            }
             ForEach(appModel.habits) { habit in
               NavigationLink {
-                HabitDetailView(selectedTab: $selectedTab, habit: habit)
+                HabitDetailView(selectedTab: $selectedTab, habit: habit).toolbar(.hidden, for: .tabBar)
               } label: {
                 HabitRowView(habit: habit)
               }

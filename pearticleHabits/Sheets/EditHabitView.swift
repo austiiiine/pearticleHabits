@@ -7,7 +7,7 @@ struct EditHabitView: View {
   @Binding var isPresented: Bool
   let originalHabit: Habit  // 新增：傳入要編輯的原始 habit
 
-  // 新增：@State 用來暫存修改中的資料
+  // @State 用來暫存修改中的資料
   @State private var title: String
   @State private var icon: String
   @State private var colorType: ColorType
