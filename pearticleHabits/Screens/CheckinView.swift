@@ -4,6 +4,8 @@ struct CheckinView: View {
   @Environment(AppModel.self) var store
   @Binding var selectedTab: Int
 
+  @State private var showingNewHabitSheet = false
+
   var body: some View {
     NavigationStack {
       ZStack {
@@ -29,12 +31,17 @@ struct CheckinView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            print("Add habit tapped")
+            showingNewHabitSheet = true
           } label: {
             Image(systemName: "plus")
           }
           .tint(.forest)
         }
+      }
+      .sheet(isPresented: $showingNewHabitSheet) {
+        NewHabitView(isPresented: $showingNewHabitSheet)
+          .presentationDetents([.large])
+          .presentationCornerRadius(24)
       }
     }
   }

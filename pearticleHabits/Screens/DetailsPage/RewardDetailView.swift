@@ -6,6 +6,22 @@ struct RewardDetailView: View {
 
   let reward: Reward
 
+  // 管理 alert
+  @State private var showRedeemAlert = false
+  @State private var showEditSheet = false
+  @State private var showDeleteAlert = false
+
+  // 編輯用(展示 hold 要編輯的獎勵的容器)
+  @State private var editingReward: Reward
+
+  // Init（把 reward 帶進 editingReward）
+  init(selectedTab: Binding<Int>, reward: Reward) {
+    self._selectedTab = selectedTab
+    self.reward = reward
+    self._editingReward = State(initialValue: reward)
+  }
+
+
   var body: some View {
     ZStack {
       Color(.white)
@@ -34,7 +50,7 @@ struct RewardDetailView: View {
 
           // 兌換按鈕
           Button {
-            appModel.redeemReward(reward)
+            showRedeemAlert = true
           } label: {
             HStack(alignment: .center, spacing: 8) {
               Image(systemName: "app.gift")
@@ -65,7 +81,60 @@ struct RewardDetailView: View {
         }
       }
       .padding()
+
+      // Toolbar
+      .toolbar {
+
+        // 右上角選單
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Menu {
+            // 編輯獎勵
+            Button {
+              editingReward = reward   // 每次打開前重新同步
+              showEditSheet = true
+            } label: {
+              Label("編輯獎勵", systemImage: "pencil")
+            }
+
+            // 刪除獎勵
+            Button(role: .destructive) {
+              showDeleteAlert = true
+            } label: {
+              Label("刪除獎勵", systemImage: "trash")
+            }
+
+          } label: {
+            Image(systemName: "ellipsis")
+              .font(.system(size: 18, weight: .semibold))
+              .foregroundStyle(.forest)
+          }
+        }
+      }
+
+      // 兌換獎勵 alert
+      .alert("是否確認兌換獎勵？", isPresented: $showRedeemAlert) {
+        Button("取消", role: .cancel) { }
+        Button("確認兌換") {
+          appModel.redeemReward(reward)
+        }
+      } message: {
+        Text("此動作無法回復，兌換的梨子無法退回喔！")
+      }
+
+      // 刪除確認 alert
+      .alert("確定要刪除這個獎勵嗎？", isPresented: $showDeleteAlert) {
+        Button("取消", role: .cancel) { }
+        Button("刪除", role: .destructive) {
+          if let index = appModel.rewards.firstIndex(where: { $0.id == reward.id }) {
+            appModel.rewards.remove(at: index)
+          }
+        }
+      } message: {
+        Text("此操作無法復原。")
+      }
+
     }
+
   }
 }
 

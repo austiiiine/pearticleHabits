@@ -2,21 +2,14 @@ import SwiftUI
 
 struct HabitListView: View {
   @Environment(AppModel.self) var appModel
+  
+  @State private var showingNewHabitSheet = false
 
   var body: some View {
     NavigationStack {
       ZStack {
         Color(.rice)
           .ignoresSafeArea()
-
-        //        HStack() {
-        //          Text("習慣")
-        //            .font(.title)
-        //            .foregroundStyle(Color(.forest))
-        //          Spacer()
-        //          Image("plus")
-        //            .font(.system(size: 16, weight: .semibold))
-        //        }
 
         ScrollView {
           VStack(spacing: 16) {
@@ -40,12 +33,17 @@ struct HabitListView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            print("Add habit tapped")
+            showingNewHabitSheet = true
           } label: {
             Image(systemName: "plus")
           }
           .tint(.forest)
         }
+      }
+      .sheet(isPresented: $showingNewHabitSheet) {
+        NewHabitView(isPresented: $showingNewHabitSheet)
+          .presentationDetents([.large])
+          .presentationCornerRadius(24)
       }
     }
   }

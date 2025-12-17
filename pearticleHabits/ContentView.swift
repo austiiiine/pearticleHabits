@@ -6,21 +6,21 @@ struct ContentView: View {
 
   // 自訂 title 顏色
   init() {
+    // 上方 Nav
     let appearance = UINavigationBarAppearance()
     appearance.configureWithTransparentBackground()
-
     // 大標題（Large Title）顏色
     appearance.largeTitleTextAttributes = [
       .foregroundColor: UIColor(named: "forest")!
     ]
-
     // 一般標題（inline）顏色
     appearance.titleTextAttributes = [
       .foregroundColor: UIColor(named: "forest")!
     ]
-
+    
     UINavigationBar.appearance().standardAppearance = appearance
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
   }
 
   var body: some View {

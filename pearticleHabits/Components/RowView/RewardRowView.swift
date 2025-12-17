@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RewardRowView: View {
   @Environment(AppModel.self) var appModel
+  @State private var showAlert = false
 
   let reward: Reward
 
@@ -34,7 +35,8 @@ struct RewardRowView: View {
       Spacer(minLength: 12)
       HStack(alignment: .center, spacing: 12) {
         Button {
-          appModel.redeemReward(reward)
+          showAlert = true
+          // appModel.redeemReward(reward)
         } label: {
           RedeemButton(label: reward.redeemed ? "已兌換" : "兌換")
             .opacity(reward.redeemed ? 0.6 : 1.0)
@@ -50,6 +52,14 @@ struct RewardRowView: View {
     .padding(.vertical, 20)
     .frame(maxWidth: .infinity, alignment: .center)
     .cardStyle(background: .rice)
+    .alert("是否確認兌換獎勵？", isPresented: $showAlert) {
+      Button("取消", role: .cancel) { }
+      Button("確認兌換") {
+        appModel.redeemReward(reward)
+      }
+    } message: {
+      Text("此動作無法回復，兌換的梨子無法退回喔！")
+    }
   }
 }
 

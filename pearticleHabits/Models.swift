@@ -16,12 +16,11 @@ struct Habit: Identifiable, Codable {
 }
 
 // 獎勵項目
-struct Reward: Identifiable, Codable {
+struct Reward: Identifiable, Codable, Equatable {
   var id: UUID = UUID()
   var title: String
   var icon: String
   var colorType: ColorType
-
   var cost: Int // 需要多少貼紙兌換
   var redeemed: Bool = false // 是否已兌換
 }

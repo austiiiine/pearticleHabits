@@ -11,6 +11,25 @@ class AppModel {
   private let rewardsKey = "rewardsKey"
   private let redeemableKey = "redeemablePearKey"
 
+  static let icons: [String] = [
+    "paintpalette.fill",
+    "pills.fill",
+    "dumbbell.fill",
+    "drop.fill",
+    "book.fill",
+    "birthday.cake.fill",
+    "smartphone",
+    "gift.fill",
+    "headphones.over.ear",
+    "figure.walk",
+    "figure.run",
+    "figure.cooldown",
+    "leaf.fill",
+    "star.fill",
+    "moon.fill",
+    "flame.fill"
+  ]
+
   init() {
     if UserDefaults.standard.data(forKey: habitsKey) == nil {
       initializeFakeData()
@@ -30,7 +49,7 @@ class AppModel {
     ]
     rewards = [
       Reward(title: "吃提拉米蘇", icon: "birthday.cake.fill", colorType: .mustard, cost: 7),
-      Reward(title: "買手機殼", icon: "iphone.gen3", colorType: .sky, cost: 30)
+      Reward(title: "買手機殼", icon: "smartphone", colorType: .sky, cost: 30)
     ]
     redeemablePearCount = habits.reduce(0) { $0 + $1.pearCount }
   }

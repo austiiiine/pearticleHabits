@@ -3,6 +3,7 @@ import SwiftUI
 struct RewardListView: View {
   @Environment(AppModel.self) var appModel
   @Binding var selectedTab: Int
+  @State private var showingNewRewardSheet = false
 
   var body: some View {
     NavigationStack {
@@ -18,9 +19,6 @@ struct RewardListView: View {
           .padding(.bottom, 20)
 
           VStack(spacing: 16) {
-            //            ForEach(appModel.rewards) { reward in
-            //              RewardRowView(reward: reward)
-            //            }
             ForEach(appModel.rewards) { reward in
               NavigationLink {
                 RewardDetailView(
@@ -42,12 +40,17 @@ struct RewardListView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            print("Add reward tapped")
+            showingNewRewardSheet = true
           } label: {
             Image(systemName: "plus")
           }
           .tint(.forest)
         }
+      }
+      .sheet(isPresented: $showingNewRewardSheet) {
+        NewRewardView(isPresented: $showingNewRewardSheet)
+          .presentationDetents([.large])
+          .presentationCornerRadius(24)
       }
     }
   }
