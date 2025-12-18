@@ -33,7 +33,7 @@ struct RewardListView: View {
             .buttonStyle(.plain)
           }
         }
-        .padding()
+        .contentMargins(.horizontal, 16)
       }
       .navigationTitle("獎勵")
       .navigationBarTitleDisplayMode(.large)

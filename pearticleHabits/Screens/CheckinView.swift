@@ -23,7 +23,7 @@ struct CheckinView: View {
             habits: store.habits
           )
         }
-        .padding()
+        .contentMargins(.horizontal, 16)
 
       }
       .navigationTitle("打卡")

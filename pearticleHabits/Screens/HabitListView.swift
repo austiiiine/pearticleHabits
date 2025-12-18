@@ -24,7 +24,7 @@ struct HabitListView: View {
             .buttonStyle(.plain)
           }
         }
-        .contentMargins(.horizontal, 20)
+        .contentMargins(.horizontal, 16)
       }
       .navigationTitle("習慣")
       .navigationBarTitleDisplayMode(.large)
