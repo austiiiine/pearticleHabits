@@ -38,23 +38,122 @@ class AppModel {
     loadData()
   }
 
-  /// 把假資料寫入狀態中
+  /// demo 用的假資料
   func initializeFakeData() {
     habits = [
-      Habit(title: "畫畫", icon: "paintpalette.fill", colorType: .mustard, pearCount: 19, streakCount: 12),
-      Habit(title: "吃保健品", icon: "pills.fill", colorType: .peach, pearCount: 7, streakCount: 5),
-      Habit(title: "健身", icon: "dumbbell.fill", colorType: .fern, pearCount: 42, streakCount: 35),
-      Habit(title: "喝水 1000 cc", icon: "drop.fill", colorType: .sky, pearCount: 28, streakCount: 21),
-      Habit(title: "閱讀 20 分鐘", icon: "book.fill", colorType: .lime, pearCount: 15, streakCount: 10)
+
+      Habit(
+        title: "畫畫",
+        icon: "paintpalette.fill",
+        colorType: .mustard,
+        pearCount: 19,
+        streakCount: 12,
+        records: [
+          "2025-10-02": 1,
+          "2025-10-03": 2,
+          "2025-10-06": 1,
+          "2025-10-10": 1,
+          "2025-10-15": 2,
+          "2025-11-01": 1,
+          "2025-11-05": 2,
+          "2025-11-20": 1,
+          "2025-12-02": 1,
+          "2025-12-08": 2,
+          "2025-12-18": 1
+        ]
+      ),
+
+      Habit(
+        title: "吃保健品",
+        icon: "pills.fill",
+        colorType: .peach,
+        pearCount: 7,
+        streakCount: 5,
+        records: [
+          "2025-10-05": 1,
+          "2025-10-06": 1,
+          "2025-10-07": 1,
+          "2025-11-03": 1,
+          "2025-11-04": 1,
+          "2025-12-01": 1,
+          "2025-12-03": 1
+        ]
+      ),
+
+      Habit(
+        title: "健身",
+        icon: "dumbbell.fill",
+        colorType: .fern,
+        pearCount: 42,
+        streakCount: 35,
+        records: [
+          "2025-10-01": 2,
+          "2025-10-02": 1,
+          "2025-10-04": 2,
+          "2025-10-07": 1,
+          "2025-10-10": 2,
+          "2025-11-02": 2,
+          "2025-11-05": 1,
+          "2025-11-10": 3,
+          "2025-11-15": 2,
+          "2025-12-01": 2,
+          "2025-12-05": 1,
+          "2025-12-10": 2,
+          "2025-12-15": 2
+        ]
+      ),
+
+      Habit(
+        title: "喝水 1000 cc",
+        icon: "drop.fill",
+        colorType: .sky,
+        pearCount: 28,
+        streakCount: 21,
+        records: [
+          "2025-10-01": 3,
+          "2025-10-02": 2,
+          "2025-10-03": 2,
+          "2025-10-04": 1,
+          "2025-10-05": 3,
+          "2025-11-01": 2,
+          "2025-11-03": 2,
+          "2025-11-06": 1,
+          "2025-11-20": 2,
+          "2025-12-01": 3,
+          "2025-12-02": 2,
+          "2025-12-04": 1,
+          "2025-12-12": 2
+        ]
+      ),
+
+      Habit(
+        title: "閱讀 20 分鐘",
+        icon: "book.fill",
+        colorType: .lime,
+        pearCount: 15,
+        streakCount: 10,
+        records: [
+          "2025-10-03": 1,
+          "2025-10-06": 1,
+          "2025-10-09": 1,
+          "2025-11-02": 1,
+          "2025-11-09": 2,
+          "2025-11-18": 1,
+          "2025-12-05": 1,
+          "2025-12-10": 1
+        ]
+      )
     ]
+
     rewards = [
       Reward(title: "吃提拉米蘇", icon: "birthday.cake.fill", colorType: .mustard, cost: 7),
       Reward(title: "買手機殼", icon: "smartphone", colorType: .sky, cost: 30)
     ]
+
     redeemablePearCount = habits.reduce(0) { $0 + $1.pearCount }
   }
 
-  /// 清除所有資料並重新初始化
+  /// 初始化假資料（demo用）
   func resetData() {
     // 移除儲存資料
     UserDefaults.standard.removeObject(forKey: habitsKey)
