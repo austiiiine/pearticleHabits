@@ -66,7 +66,6 @@ struct CheckinRowView: View {
     title: "畫畫",
     icon: "paintpalette.fill",
     colorType: .mustard,
-    pearCount: 19,
-    streakCount: 12
+    pearCount: 19
   ))
 }

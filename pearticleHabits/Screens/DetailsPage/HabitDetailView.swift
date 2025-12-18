@@ -233,8 +233,7 @@ struct HabitDetailView: View {
     title: "喝水 1000 cc",
     icon: "drop.fill",
     colorType: .sky,
-    pearCount: 28,
-    streakCount: 21
+    pearCount: 28
   )
 
   HabitDetailView(selectedTab: $selectedTab, habit: habit)

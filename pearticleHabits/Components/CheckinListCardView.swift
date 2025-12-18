@@ -27,36 +27,31 @@ struct CheckinListCard: View {
       title: "畫畫",
       icon: "paintpalette.fill",
       colorType: .mustard,
-      pearCount: 19,
-      streakCount: 12
+      pearCount: 19
     ),
     Habit(
       title: "吃保健品",
       icon: "pills.fill",
       colorType: .peach,
-      pearCount: 7,
-      streakCount: 5
+      pearCount: 7
     ),
     Habit(
       title: "健身",
       icon: "dumbbell.fill",
       colorType: .fern,
-      pearCount: 42,
-      streakCount: 35
+      pearCount: 42
     ),
     Habit(
       title: "喝水 1000 cc",
       icon: "drop.fill",
       colorType: .sky,
-      pearCount: 28,
-      streakCount: 21
+      pearCount: 28
     ),
     Habit(
       title: "閱讀 20 分鐘",
       icon: "book.fill",
       colorType: .lime,
-      pearCount: 15,
-      streakCount: 10
+      pearCount: 15
     )
   ]
   CheckinListCard(habits: habits)

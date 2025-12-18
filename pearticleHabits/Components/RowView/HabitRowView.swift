@@ -24,11 +24,11 @@ struct HabitRowView: View {
       Spacer(minLength: 12)
       HStack(alignment: .center, spacing: 16) {
         VStack(alignment: .trailing, spacing: 0) {
-          Text(String(habit.pearCount))
+          Text(String(habit.streakCount))
             .font(.title3)
             .fontWeight(.bold)
             .foregroundStyle(.forest)
-          Text("已累積")
+          Text("已連續打卡")
             .font(.callout)
             .foregroundStyle(.forest)
         }
@@ -59,8 +59,7 @@ struct HabitRowView: View {
       title: "畫畫",
       icon: "paintpalette.fill",
       colorType: .mustard,
-      pearCount: 19,
-      streakCount: 12
+      pearCount: 19
     )
   )
   .environment(AppModel())

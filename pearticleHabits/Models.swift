@@ -9,10 +9,41 @@ struct Habit: Identifiable, Codable {
   var colorType: ColorType
 
   var pearCount: Int = 0 // 習慣已累積貼紙數
-  var streakCount: Int = 0 // 連續打卡天數
+  // var streakCount: Int = 0 // 連續打卡天數
 
   // 每天打卡計數
   var records: [String: Int] = [:] // 用 DateFormatter 轉存
+
+  // 動態計算 streak
+  var streakCount: Int {
+    calculateStreak()
+  }
+
+  func calculateStreak() -> Int {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    formatter.timeZone = .current
+
+    var streak = 0
+    var currentDate = Date()
+
+    while true {
+      let key = formatter.string(from: currentDate)
+
+      if let count = records[key], count != 0 {
+        streak += 1
+      } else {
+        break
+      }
+
+      guard let previousDay = Calendar.current.date(byAdding: .day, value: -1, to: currentDate) else {
+        break
+      }
+      currentDate = previousDay
+    }
+
+    return streak
+  }
 }
 
 // 獎勵項目

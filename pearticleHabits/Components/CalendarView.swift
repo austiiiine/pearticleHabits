@@ -15,7 +15,7 @@ struct CalendarView: View {
   }()
 
   var body: some View {
-    VStack(spacing: 16) {
+    VStack(spacing: 12) {
       // 顯示月份與左右切換按鈕
       HStack {
         Button(action: {
@@ -40,7 +40,7 @@ struct CalendarView: View {
         }
       }
       .padding()
-      .cardStyle()
+      .cardStyle(cornerRadius: 99)
 
       // 日曆格子（每月 1~31 號）
       let days = generateDays(for: displayedMonth)
@@ -105,7 +105,6 @@ struct CalendarView: View {
     icon: "sunrise.fill",
     colorType: .mustard,
     pearCount: 10,
-    streakCount: 5,
     records: sampleRecords
   )
 
