@@ -10,8 +10,6 @@ struct HabitRowView: View {
       HStack(alignment: .center, spacing: 20) {
         VStack(alignment: .center) {
           Image(systemName: habit.icon)
-          //          .resizable()
-          //          .frame(width: 28, height: 28)
             .font(.system(size: 28, weight: .semibold))
             .foregroundStyle(habit.colorType.color)
         }
@@ -35,14 +33,6 @@ struct HabitRowView: View {
         Image(systemName: "chevron.right")
           .font(.system(size: 16, weight: .semibold))
           .foregroundStyle(.forest)
-//        NavigationLink {
-//          HabitDetailView(habit: habit)
-//        } label: {
-//          Image(systemName: "chevron.right")
-//            .font(.system(size: 16, weight: .semibold))
-//            .foregroundStyle(.forest)
-//        }
-//        .buttonStyle(.plain)
       }
 
     }

@@ -9,6 +9,9 @@ struct RewardRowView: View {
   @State private var errorMessage: String = ""
 
   let reward: Reward
+  
+  // 用來接收&傳遞 confetti 的 trigger
+  @Binding var trigger: Int
 
   var body: some View {
     HStack(alignment: .center) {
@@ -64,6 +67,8 @@ struct RewardRowView: View {
         if let error = appModel.redeemReward(reward) {
           errorMessage = error
           showErrorAlert = true
+        } else {
+          trigger += 1   // 觸發 confetti
         }
       }
     } message: {
@@ -78,16 +83,4 @@ struct RewardRowView: View {
     }
 
   }
-}
-
-#Preview {
-  RewardRowView(reward:
-                  Reward(
-                    title: "吃提拉米蘇",
-                    icon: "birthday.cake.fill",
-                    colorType: .mustard,
-                    cost: 7
-                  )
-  )
-  .environment(AppModel())
 }

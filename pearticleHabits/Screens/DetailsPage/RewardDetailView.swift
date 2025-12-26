@@ -1,4 +1,5 @@
 import SwiftUI
+import ConfettiSwiftUI
 
 struct RewardDetailView: View {
   @Environment(AppModel.self) var appModel
@@ -18,6 +19,9 @@ struct RewardDetailView: View {
 
   // 編輯用(展示 hold 要編輯的獎勵的容器)
   @State private var editingReward: Reward
+
+  // 用來 trigger Confetti
+  @State private var trigger: Int = 0
 
   // Init（把 reward 帶進 editingReward）
   init(selectedTab: Binding<Int>, reward: Reward) {
@@ -130,6 +134,8 @@ struct RewardDetailView: View {
           if let error = appModel.redeemReward(reward) {
             errorMessage = error
             showErrorAlert = true
+          } else {
+            trigger += 1   // 觸發 confetti
           }
         }
       } message: {
@@ -157,6 +163,12 @@ struct RewardDetailView: View {
       }
 
     }
+    .confettiCannon(        // Confetti 效果
+      trigger: $trigger,
+      confettis: [.text("🍐")],
+      confettiSize: 20,
+      rainHeight: 600.0
+    )
 
   }
 }

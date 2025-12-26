@@ -1,9 +1,13 @@
 import SwiftUI
+import ConfettiSwiftUI
 
 struct RewardListView: View {
   @Environment(AppModel.self) var appModel
   @Binding var selectedTab: Int
   @State private var showingNewRewardSheet = false
+
+  // 用來 trigger Confetti
+  @State private var trigger: Int = 0
 
   var body: some View {
     NavigationStack {
@@ -27,7 +31,7 @@ struct RewardListView: View {
                 )
                 .toolbar(.hidden, for: .tabBar)
               } label: {
-                RewardRowView(reward: reward)
+                RewardRowView(reward: reward, trigger: $trigger)
               }
             }
             .buttonStyle(.plain)
@@ -37,6 +41,12 @@ struct RewardListView: View {
       }
       .navigationTitle("獎勵")
       .navigationBarTitleDisplayMode(.large)
+      .confettiCannon(        // Confetti 效果
+        trigger: $trigger,
+        confettis: [.text("🍐")],
+        confettiSize: 20,
+        rainHeight: 600.0
+      )
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
