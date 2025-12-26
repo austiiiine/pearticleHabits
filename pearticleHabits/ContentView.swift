@@ -41,47 +41,6 @@ struct ContentView: View {
         .tabItem { Label("設定", systemImage: "gearshape") }
         .tag(3)
     }
-//    TabView(selection: $selectedTab) {
-//      CheckinView(selectedTab: $selectedTab)
-//        .tabItem {
-//          VStack {
-//            Image("checkin")
-//              .renderingMode(.template)
-//            Text("打卡")
-//          }
-//        }
-//        .tag(0)
-//
-//      HabitListView(selectedTab: $selectedTab)
-//        .tabItem {
-//          VStack {
-//            Image("habits")
-//              .renderingMode(.template)
-//            Text("習慣")
-//          }
-//        }
-//        .tag(1)
-//
-//      RewardListView(selectedTab: $selectedTab)
-//        .tabItem {
-//          VStack {
-//            Image("rewards")
-//              .renderingMode(.template)
-//            Text("獎勵")
-//          }
-//        }
-//        .tag(2)
-//
-//      SettingsView()
-//        .tabItem {
-//          VStack {
-//            Image("settings")
-//              .renderingMode(.template)
-//            Text("設定")
-//          }
-//        }
-//        .tag(3)
-//    }
     .environment(appModel)
   }
 }

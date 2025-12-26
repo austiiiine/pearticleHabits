@@ -9,6 +9,8 @@ struct CheckinRowView: View {
     return habit.records[today] ?? 0
   }
 
+  @State private var rotationAngle: Double = 0
+
   var body: some View {
 
     HStack(alignment: .center) {
@@ -41,7 +43,10 @@ struct CheckinRowView: View {
         }
         // 打卡按鈕
         Button {
-          appModel.addRecord(for: habit)
+          withAnimation(.easeOut(duration: 0.6)) {
+            rotationAngle += 180
+            appModel.addRecord(for: habit)
+          }
         } label: {
           Image(systemName: "plus")
             .font(.system(size: 18, weight: .bold))
@@ -49,6 +54,7 @@ struct CheckinRowView: View {
             .frame(width: 36, height: 36)
             .background(.forest)
             .clipShape(Circle())
+            .rotationEffect(.degrees(rotationAngle))
         }
       }
 
