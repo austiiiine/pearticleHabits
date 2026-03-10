@@ -9,8 +9,9 @@
 <img width="1920" height="1080" alt="concept" src="https://github.com/user-attachments/assets/cda78d46-11bc-47c9-a63e-39ab271bc475" />
 
 ### 2. 操作 Demo
-[梨子習慣 Demo](https://www.youtube.com/watch?v=XZh2EWlf-fw)
-[Medium 文章](https://medium.com/台大-cs-x-ios-app-程式設計/ios-swiftui-手機應用程式設計入門-06-期末-app-梨子習慣-d7d817499689)
+[📱 梨子習慣 Demo](https://www.youtube.com/watch?v=XZh2EWlf-fw)
+
+[✍️ Medium 文章](https://medium.com/台大-cs-x-ios-app-程式設計/ios-swiftui-手機應用程式設計入門-06-期末-app-梨子習慣-d7d817499689)
 
 ## 專案架構
 
